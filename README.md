@@ -5,18 +5,18 @@ Software desenvolvido em equipe, para avaliação da matéria de POO. O objetivo
 <table align="center">
   <td align="center" width=150px height=150px>
     <img src="https://avatars.githubusercontent.com/u/161087448?v=4" width=60px />
-    <p><a href="https://github.com/gustavofontanabertoldi">Gustavo Fontana</a></p>
+    <p><a href="https://github.com/gustavofontanabertoldi">gustavofontanabertoldi</a></p>
   </td>
   <td align="center" width=150px height=150px>
     <img src="https://avatars.githubusercontent.com/u/138159844?v=4" width=60px />
-    <p><a href="https://github.com/JeanCarloCunha">Jean Cunha</a></p>
+    <p><a href="https://github.com/JeanCarloCunha">Jean_Cunha</a></p>
   </td>
   <td align="center" width=150px height=150px>
     <img src="https://avatars.githubusercontent.com/u/161049463?v=4" width=60px />
-    <p><a href="https://github.com/ssumik">João Sumi</a></p>
+    <p><a href="https://github.com/ssumik">ssumik</a></p>
   </td>
   <td align="center" width=150px height=150px>
     <img src="https://avatars.githubusercontent.com/u/53160578?v=4" width=60px />
-    <p><a href="https://github.com/PedRo-HenRique-14">Pedro Garcia</a></p>
+    <p><a href="https://github.com/PedRo-HenRique-14">Dodas_</a></p>
   </td>
 </table>
