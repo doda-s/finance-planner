@@ -17,6 +17,6 @@ Software desenvolvido em equipe, para avaliação da matéria de POO. O objetivo
   </td>
   <td align="center" width=150px height=150px>
     <img src="https://avatars.githubusercontent.com/u/53160578?v=4" width=60px />
-    <p><a href="https://github.com/PedRo-HenRique-14">Dodas_</a></p>
+    <p><a href="https://github.com/doda-s">Dodas_</a></p>
   </td>
 </table>
