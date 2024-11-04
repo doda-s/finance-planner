@@ -1,3 +1,5 @@
+package me.dodas.financeplanner.entities;
+
 public class Expense{
 
         private String name;
