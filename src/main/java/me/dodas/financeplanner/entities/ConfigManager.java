@@ -3,6 +3,7 @@ package me.dodas.financeplanner.entities;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigManager {
@@ -17,7 +18,7 @@ public class ConfigManager {
 
     public void loadConfig(){
         try{
-            FileInputStream file = new FileInputStream("properties/config.properties");
+            InputStream file = this.getClass().getResourceAsStream("/config/application.properties");
             properties.load(file);
         }
         catch(FileNotFoundException e){
