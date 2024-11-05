@@ -2,6 +2,7 @@
 bin/
 target/
 test/
+spreadsheets/
 
 # Compiled class file
 *.class
