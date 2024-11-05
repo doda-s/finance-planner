@@ -1,5 +1,5 @@
 # Finance Planner
-Software desenvolvido em equipe, para avaliação da matéria de POO. O objetivo deste software é gerenciar despesas e receitas mensais, fornecendo indormações de forma rápida e fácil, assim auxiliando a gestão de finanças.
+Software desenvolvido em equipe, para avaliação da matéria de POO. O objetivo deste software é gerenciar despesas e receitas mensais, fornecendo informações de forma rápida e fácil, assim auxiliando a gestão de finanças.
 
 ## Membros do Grupo
 <table align="center">
