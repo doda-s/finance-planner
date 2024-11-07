@@ -51,6 +51,10 @@ public class MonthlyRegister {
         return monthId;
     }
 
+    public void setId(int id) {
+        this.monthId = id;
+    }
+
     private MonthlyRegister() {
         this.year = Year.now().getValue();
     }
