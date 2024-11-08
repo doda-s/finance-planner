@@ -15,8 +15,7 @@ public class Spreedsheet {
 
     public void addMonthlyRegister(LocalDate date){
         int id = Integer.parseInt(dtf.format(date));
-        MonthlyRegister register = new MonthlyRegister();
-        register.setId(id);
+        MonthlyRegister register = new MonthlyRegister(id);
         monthlyRegister.add(register);
     }
 
