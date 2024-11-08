@@ -1,13 +1,11 @@
 package me.dodas.financeplanner.entities;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MonthlyRegister {
 
-    int monthId;
-    int year;
+    int id;
 
     List<Revenue> revenues = new ArrayList<>();
     List<Expense> expenses = new ArrayList<>();
@@ -47,16 +45,11 @@ public class MonthlyRegister {
     // me perdi ja, mas vou dar meu melhor ksksksks
 
     public int getId() {
-
-        return monthId;
+        return id;
     }
 
-    public void setId(int id) {
-        this.monthId = id;
-    }
-
-    private MonthlyRegister() {
-        this.year = Year.now().getValue();
+    public MonthlyRegister(int id) {
+        this.id = id;
     }
 
     // Método estático para buscar um mês pelo número
