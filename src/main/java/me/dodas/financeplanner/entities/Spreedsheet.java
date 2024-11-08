@@ -1,7 +1,6 @@
 package me.dodas.financeplanner.entities;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,11 +9,11 @@ public class Spreedsheet {
     private String name;
     private Date creationDate;
     private String lastUpdateDate;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMyyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("MMyyyy");
     private List <MonthlyRegister> monthlyRegister = new ArrayList<>();
 
-    public void addMonthlyRegister(LocalDate date){
-        int id = Integer.parseInt(dtf.format(date));
+    public void createMonthlyRegister(Date date){
+        int id = Integer.parseInt(sdf.format(date));
         MonthlyRegister register = new MonthlyRegister(id);
         monthlyRegister.add(register);
     }
