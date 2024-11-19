@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Spreedsheet {
+public class Spreadsheet {
     private String name;
     private Date creationDate;
     private String lastUpdateDate;
@@ -50,7 +50,7 @@ public class Spreedsheet {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public Spreedsheet(String name){
+    public Spreadsheet(String name){
         this.name = name;
         this.creationDate = new Date();
     }
