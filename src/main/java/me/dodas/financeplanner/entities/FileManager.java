@@ -18,21 +18,6 @@ public class FileManager {
         return fileManagerInstance;
     }
 
-    // Cria um arquivo baseado no path
-    public void createFile(String path, String fileContent) {
-        Path filePath = Paths.get(path);
-        try {
-
-            FileWriter fileWriter = new FileWriter(filePath.toFile());
-            fileWriter.write(fileContent);
-            fileWriter.flush();
-            fileWriter.close();
-
-        } catch (Exception e) {
-            System.out.println("An error occurred while creating the file.");
-        }
-    }
-
     // Escreve o arquivo baseado no path
     public void writeFile(String path, String fileContent) {
         try {
@@ -42,6 +27,14 @@ public class FileManager {
             writer.close();
         } catch (Exception e) {
             System.out.println("Error trying to write a file.");
+        }
+    }
+
+    public String readFile(String path) {
+        try {
+            return Files.readString(Paths.get(path));
+        } catch(IOException e) {
+            return null;
         }
     }
 

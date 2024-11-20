@@ -1,10 +1,9 @@
 package me.dodas.financeplanner.entities;
 
-import java.nio.channels.AlreadyBoundException;
-
 import com.google.gson.Gson;
 
 public class SpreadsheetManager {
+
     private static SpreadsheetManager instance = new SpreadsheetManager();
     private FileManager fileManager = FileManager.getInstance();
     private DirectoryManager directoryManager = DirectoryManager.getInstance();
@@ -21,7 +20,7 @@ public class SpreadsheetManager {
 
     public void createSpreadsheet(String spreadsheetName, boolean forceCreation) {    
         if(loadedSpreadsheet != null && !forceCreation) {
-            throw new AlreadyBoundException();
+            throw new IllegalStateException("A spreadsheet is already loaded. Use forceCreation to overwrite it.");
         }
 
         String[] fileNames = fileManager.getFilesName(spreadsheetDirectory, new String[]{"json"});
@@ -32,11 +31,15 @@ public class SpreadsheetManager {
         }
 
         loadedSpreadsheet = new Spreadsheet(spreadsheetName);
-        fileManager.createFile(spreadsheetDirectory, gson.toJson(loadedSpreadsheet));
+        fileManager.writeFile(String.format("%s/%s.json", spreadsheetDirectory, spreadsheetName), gson.toJson(loadedSpreadsheet));
     }
 
-    public void loadSpreadsheet(String name) {
-        
+    public void loadSpreadsheet(String spreadsheetName, boolean forceLoad) {
+        if(loadedSpreadsheet != null && !forceLoad) {
+            throw new IllegalStateException("A spreadsheet is already loaded. Use forceCreation to overwrite it.");
+        }
+
+        loadedSpreadsheet = gson.fromJson(fileManager.readFile(String.format("%s/%s.json", spreadsheetDirectory, spreadsheetName)), Spreadsheet.class);
     }
 
     public void closeSpreadsheet() {
@@ -46,8 +49,15 @@ public class SpreadsheetManager {
             return;
         }
 
-        throw new NullPointerException("loadedSpreadsheet is null.");
+        throw new NullPointerException("No spreadsheet was loaded.");
     }
 
+    public void saveSpreadsheet() {
+        fileManager.writeFile(String.format("%s/%s.json", spreadsheetDirectory, loadedSpreadsheet.getName()), gson.toJson(loadedSpreadsheet));
+        System.out.printf("The spreadsheet '%s' has been saved.", loadedSpreadsheet.getName());
+    }
 
+    public Spreadsheet getLoadedSpreadsheet() {
+        return loadedSpreadsheet;
+    }
 }
