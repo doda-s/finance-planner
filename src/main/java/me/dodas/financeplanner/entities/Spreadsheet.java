@@ -9,11 +9,13 @@ public class Spreadsheet {
     private String name;
     private String creationDate;
     private String lastUpdateDate;
+
     private List <MonthlyRegister> monthlyRegister = new ArrayList<>();
 
     public void addMonthlyRegister(LocalDate date){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMyyyy");
         int id = Integer.parseInt(dtf.format(date));
+
         MonthlyRegister register = new MonthlyRegister(id);
         monthlyRegister.add(register);
 
