@@ -23,9 +23,10 @@ public class CommandManager {
             if (cmd.getName().equals(args.get(0)) || Arrays.asList(cmd.getAliases()).stream().anyMatch(alias -> args.get(0).equals(alias))) {
                 args.remove(0);
                 cmd.executeCommand(args);
-                break;
+                return;
             }
         }
+        System.out.println("Command not found.");
     }
 
     public List<Command> getCommandList() {

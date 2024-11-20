@@ -1,8 +1,9 @@
-package me.dodas.financeplanner.entities;
+package me.dodas.financeplanner.commands;
 
 import java.util.Arrays;
 import java.util.List;
 
+import me.dodas.financeplanner.entities.CommandManager;
 import me.dodas.financeplanner.interfaces.Command;
 
 public class HelpCommand implements Command{
