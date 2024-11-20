@@ -3,20 +3,22 @@ package me.dodas.financeplanner.entities;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Spreadsheet {
     private String name;
-    private Date creationDate;
+    private String creationDate;
     private String lastUpdateDate;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMyyyy");
     private List <MonthlyRegister> monthlyRegister = new ArrayList<>();
 
     public void addMonthlyRegister(LocalDate date){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMyyyy");
         int id = Integer.parseInt(dtf.format(date));
         MonthlyRegister register = new MonthlyRegister(id);
         monthlyRegister.add(register);
+
+        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        lastUpdateDate = LocalDate.now().format(dtf);
     }
 
     public MonthlyRegister getMonthlyRegister(int id){
@@ -29,7 +31,7 @@ public class Spreadsheet {
     }
 
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
@@ -51,8 +53,11 @@ public class Spreadsheet {
     }
 
     public Spreadsheet(String name){
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.name = name;
-        this.creationDate = new Date();
+        this.creationDate = date.format(dtf);
+        this.lastUpdateDate = creationDate;
     }
 
     
