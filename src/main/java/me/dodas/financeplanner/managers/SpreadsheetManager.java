@@ -42,9 +42,16 @@ public class SpreadsheetManager {
 
     public void loadSpreadsheet(String spreadsheetName, boolean forceLoad) {
         if(loadedSpreadsheet != null && !forceLoad) {
-            throw new IllegalStateException("A spreadsheet is already loaded. Use forceCreation to overwrite it.");
+            throw new IllegalStateException("A spreadsheet is already loaded. Use [-f, --force] to overwrite it.");
         }
 
+        if(spreadsheetName == null) {
+            throw new IllegalStateException("The name is invalid. Use [-n, --sheet_name <name>].");
+        }
+
+        /* FileManager está retornando null quando é tentado ler um arquivo com nome inexistente.
+         * É necessário adicionar uma verificação antes de chamar o método gson.fromJson.
+         */
         loadedSpreadsheet = gson.fromJson(fileManager.readFile(String.format("%s/%s.json", spreadsheetDirectory, spreadsheetName)), Spreadsheet.class);
     }
 
