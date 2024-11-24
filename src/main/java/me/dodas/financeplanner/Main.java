@@ -5,9 +5,9 @@ import java.util.Scanner;
 import me.dodas.financeplanner.commands.CloseCommand;
 import me.dodas.financeplanner.commands.HelpCommand;
 import me.dodas.financeplanner.commands.SpreadsheetCommand;
-import me.dodas.financeplanner.entities.CommandManager;
-import me.dodas.financeplanner.entities.ConfigManager;
-import me.dodas.financeplanner.entities.DirectoryManager;
+import me.dodas.financeplanner.managers.CommandManager;
+import me.dodas.financeplanner.managers.ConfigManager;
+import me.dodas.financeplanner.managers.DirectoryManager;
 
 public class Main {
     private static ConfigManager configManager = ConfigManager.getInstance();

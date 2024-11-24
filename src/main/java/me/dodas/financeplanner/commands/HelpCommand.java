@@ -3,9 +3,9 @@ package me.dodas.financeplanner.commands;
 import java.util.Arrays;
 import java.util.List;
 
-import me.dodas.financeplanner.entities.CommandManager;
 import me.dodas.financeplanner.interfaces.Command;
 import me.dodas.financeplanner.interfaces.SubCommand;
+import me.dodas.financeplanner.managers.CommandManager;
 
 public class HelpCommand implements Command{
     private List <Command> commands = CommandManager.getInstance().getCommandList();
