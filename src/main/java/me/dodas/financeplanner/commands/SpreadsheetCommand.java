@@ -6,6 +6,7 @@ import java.util.List;
 import me.dodas.financeplanner.interfaces.Command;
 import me.dodas.financeplanner.interfaces.SubCommand;
 import me.dodas.financeplanner.subcommands.SpreadsheetCreateSubCommand;
+import me.dodas.financeplanner.subcommands.SpreadsheetSaveSubCommand;
 
 public class SpreadsheetCommand implements Command {
 
@@ -40,6 +41,7 @@ public class SpreadsheetCommand implements Command {
 
     private void loadSubCommands() {
         subCommands.add(new SpreadsheetCreateSubCommand());
+        subCommands.add(new SpreadsheetSaveSubCommand());
     }
 
     
