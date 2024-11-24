@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import me.dodas.financeplanner.interfaces.Command;
+import me.dodas.financeplanner.interfaces.SubCommand;
 
 public class CommandManager {
     static private CommandManager instance = new CommandManager();
@@ -23,6 +24,7 @@ public class CommandManager {
             if (cmd.getName().equals(args.get(0)) || Arrays.asList(cmd.getAliases()).stream().anyMatch(alias -> args.get(0).equals(alias))) {
                 args.remove(0);
                 cmd.executeCommand(args);
+                subCommandListener(cmd, args);
                 return;
             }
         }
@@ -35,5 +37,21 @@ public class CommandManager {
 
     public void commandRegister(Command command) {
         commands.add(command);
+    }
+
+    // Verify and execute subcommands
+    private void subCommandListener(Command cmd, List<String> args) {
+        
+        if (cmd.getSubcommands().length > 0) {     
+            for(SubCommand scmd : cmd.getSubcommands()) {
+                if (scmd.getName().equals(args.get(0))) {
+                    args.remove(0);
+                    scmd.executeCommand(args);
+                    return;
+                }
+            }
+            System.out.println("Sub command not found.");
+        }
+
     }
 }

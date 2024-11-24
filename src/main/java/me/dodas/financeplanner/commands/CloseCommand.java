@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.dodas.financeplanner.Main;
 import me.dodas.financeplanner.interfaces.Command;
+import me.dodas.financeplanner.interfaces.SubCommand;
 
 public class CloseCommand implements Command {
 
@@ -23,8 +24,13 @@ public class CloseCommand implements Command {
         return aliases;
     }
 
+    public SubCommand[] getSubcommands() {
+        return new SubCommand[0];
+    }
+
     public void executeCommand(List<String> args) {
         Main.stopRunning();
     }
+    
     
 }

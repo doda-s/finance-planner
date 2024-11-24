@@ -5,6 +5,7 @@ import java.util.List;
 
 import me.dodas.financeplanner.entities.CommandManager;
 import me.dodas.financeplanner.interfaces.Command;
+import me.dodas.financeplanner.interfaces.SubCommand;
 
 public class HelpCommand implements Command{
     private List <Command> commands = CommandManager.getInstance().getCommandList();
@@ -55,5 +56,9 @@ public class HelpCommand implements Command{
 
     private void printCommand(Command arg){
         System.out.println(arg.getName() + ": " + arg.getDescription() + " Aliases: " + arg.getAliases());
+    }
+
+    public SubCommand[] getSubcommands() {
+        return new SubCommand[0];
     }
 }

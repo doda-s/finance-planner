@@ -6,5 +6,6 @@ public interface Command {
     public String getName();
     public String getDescription();
     public String[] getAliases();
+    public SubCommand[] getSubcommands();
     public void executeCommand(List<String> args);
 }

@@ -20,13 +20,17 @@ public class SpreadsheetManager {
 
     public void createSpreadsheet(String spreadsheetName, boolean forceCreation) {    
         if(loadedSpreadsheet != null && !forceCreation) {
-            throw new IllegalStateException("A spreadsheet is already loaded. Use forceCreation to overwrite it.");
+            throw new IllegalStateException("A spreadsheet is already loaded. Use [-f, --force] to overwrite it.");
+        }
+
+        if(spreadsheetName == null) {
+            throw new IllegalStateException("The name is invalid. Use [-n, --sheet_name <name>].");
         }
 
         String[] fileNames = fileManager.getFilesName(spreadsheetDirectory, new String[]{"json"});
         for(String name : fileNames) {
-            if (name.replace(".json", "") == spreadsheetName) {
-                throw new IllegalArgumentException(String.format("The file named %s already exists.", spreadsheetName));
+            if (name.replace(".json", "").equals(spreadsheetName)) {
+                throw new IllegalArgumentException(String.format("The file named '%s' already exists.", spreadsheetName));
             }
         }
 
