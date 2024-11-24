@@ -1,4 +1,4 @@
-package me.dodas.financeplanner.entities;
+package me.dodas.financeplanner.models;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

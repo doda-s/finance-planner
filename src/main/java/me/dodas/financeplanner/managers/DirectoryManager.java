@@ -1,4 +1,4 @@
-package me.dodas.financeplanner.entities;
+package me.dodas.financeplanner.managers;
 
 import java.io.File;
 import java.nio.file.Files;

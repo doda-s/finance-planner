@@ -1,4 +1,4 @@
-package me.dodas.financeplanner.entities;
+package me.dodas.financeplanner.managers;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -12,8 +12,8 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import me.dodas.financeplanner.entities.SpreadsheetManager;
 import me.dodas.financeplanner.interfaces.SubCommand;
+import me.dodas.financeplanner.managers.SpreadsheetManager;
 
 public class SpreadsheetCreateSubCommand implements SubCommand {
 

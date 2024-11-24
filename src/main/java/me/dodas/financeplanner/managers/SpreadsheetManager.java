@@ -1,6 +1,8 @@
-package me.dodas.financeplanner.entities;
+package me.dodas.financeplanner.managers;
 
 import com.google.gson.Gson;
+
+import me.dodas.financeplanner.models.Spreadsheet;
 
 public class SpreadsheetManager {
 
