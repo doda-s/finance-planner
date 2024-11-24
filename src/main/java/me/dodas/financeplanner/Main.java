@@ -2,6 +2,7 @@ package me.dodas.financeplanner;
 
 import java.util.Scanner;
 
+import me.dodas.financeplanner.commands.CloseCommand;
 import me.dodas.financeplanner.commands.HelpCommand;
 import me.dodas.financeplanner.entities.CommandManager;
 import me.dodas.financeplanner.entities.ConfigManager;
@@ -13,7 +14,7 @@ public class Main {
     private static CommandManager commandManager = CommandManager.getInstance();
     private static Scanner scanner = new Scanner(System.in);
 
-    private static Boolean run = true;
+    private static boolean run = true;
 
     public static void main(String[] args) {
 
@@ -22,13 +23,14 @@ public class Main {
         loadCommands();
 
         do {
+            System.out.print(">> ");
             commandManager.commandListener(scanner.nextLine());
         } while (run);
         
         scanner.close();
     }
 
-    public void stopRunning() {
+    public static void stopRunning() {
         run = false;
     }
 
@@ -43,7 +45,9 @@ public class Main {
         System.out.println("Directories checked successfully.");
     }
 
+    // Carrega todos os comandos :D
     private static void loadCommands() {
         commandManager.commandRegister(new HelpCommand());
+        commandManager.commandRegister(new CloseCommand());
     }
 }
