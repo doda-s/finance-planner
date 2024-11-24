@@ -59,6 +59,10 @@ public class SpreadsheetManager {
     }
 
     public void saveSpreadsheet() {
+        if(loadedSpreadsheet == null) {
+            throw new IllegalStateException("No spreadsheet loaded to save.");    
+        }
+
         fileManager.writeFile(String.format("%s/%s.json", spreadsheetDirectory, loadedSpreadsheet.getName()), gson.toJson(loadedSpreadsheet));
         System.out.printf("The spreadsheet '%s' has been saved.", loadedSpreadsheet.getName());
     }
