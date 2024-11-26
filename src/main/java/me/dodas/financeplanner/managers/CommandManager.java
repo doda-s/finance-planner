@@ -44,10 +44,12 @@ public class CommandManager {
         
         if (cmd.getSubcommands().length > 0) {     
             for(SubCommand scmd : cmd.getSubcommands()) {
-                if (scmd.getName().equals(args.get(0))) {
-                    args.remove(0);
-                    scmd.executeCommand(args);
-                    return;
+                if(args.size() > 0) {
+                    if (scmd.getName().equals(args.get(0))) {
+                        args.remove(0);
+                        scmd.executeCommand(args);
+                        return;
+                    }
                 }
             }
             System.out.println("Sub command not found.");
