@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import me.dodas.financeplanner.commands.CloseCommand;
 import me.dodas.financeplanner.commands.HelpCommand;
+import me.dodas.financeplanner.commands.MonthlyRegisterCommand;
 import me.dodas.financeplanner.commands.SpreadsheetCommand;
 import me.dodas.financeplanner.managers.CommandManager;
 import me.dodas.financeplanner.managers.ConfigManager;
@@ -51,5 +52,6 @@ public class Main {
         commandManager.commandRegister(new HelpCommand());
         commandManager.commandRegister(new CloseCommand());
         commandManager.commandRegister(new SpreadsheetCommand());
+        commandManager.commandRegister(new MonthlyRegisterCommand());
     }
 }
