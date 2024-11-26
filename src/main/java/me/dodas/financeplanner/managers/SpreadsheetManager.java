@@ -73,6 +73,16 @@ public class SpreadsheetManager {
         fileManager.writeFile(String.format("%s/%s.json", spreadsheetDirectory, loadedSpreadsheet.getName()), gson.toJson(loadedSpreadsheet));
         System.out.printf("The spreadsheet '%s' has been saved.", loadedSpreadsheet.getName());
     }
+    
+    public void deleteSpreadsheet(String spreadsheetName) {
+        if(spreadsheetName == null) {
+            throw new IllegalStateException("The name is invalid. Use [-n, --sheet_name <name>].");
+        }
+
+        fileManager.deleteFile(String.format("%s/%s.json", spreadsheetDirectory, spreadsheetName));
+        loadedSpreadsheet = null;
+
+    }
 
     public Spreadsheet getLoadedSpreadsheet() {
         return loadedSpreadsheet;
