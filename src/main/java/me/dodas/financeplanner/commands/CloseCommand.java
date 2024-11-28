@@ -9,7 +9,7 @@ import me.dodas.financeplanner.interfaces.SubCommand;
 public class CloseCommand implements Command {
 
     private String name = "close";
-    private String description = "Close the program";
+    private String description = "Close the program.";
     private String[] aliases = new String[]{};
 
     public String getName() {

@@ -10,8 +10,8 @@ import me.dodas.financeplanner.managers.CommandManager;
 public class HelpCommand implements Command{
     private List <Command> commands = CommandManager.getInstance().getCommandList();
     private String name = "help";
-    private String description = "help: shows the usage and explains how to use commands.";
-    private String[] aliases = {"-h"};
+    private String description = "Shows the usage and explains how to use commands.";
+    private String[] aliases = {"h"};
 
     public String getName() {
         return name;
@@ -27,7 +27,8 @@ public class HelpCommand implements Command{
 
     public void executeCommand(List<String> args) {
         if (args.isEmpty()) {
-            printAllCommands(); // Exibe todos os comandos se nenhum argumento for fornecido
+            printAllCommands();
+            System.out.println(""); // Exibe todos os comandos se nenhum argumento for fornecido
             return;
         }
         
@@ -39,7 +40,7 @@ public class HelpCommand implements Command{
                     printCommand(cmd); // Exibe informações do comando correspondente
                     found = true;
                     break; // Comando encontrado, não precisa continuar a busca
-                }
+                }   
             }
             if (!found) {
                 System.out.printf("Comando '%s' não encontrado.%n", argName); // Mensagem de erro para comandos não encontrados
@@ -50,12 +51,34 @@ public class HelpCommand implements Command{
 
     private void printAllCommands(){
         for (Command arg : commands) {
-            System.out.println(arg.getName()+": "+arg.getDescription() + " Aliases: " + arg.getAliases());
+            String aliaseString = "";
+
+            if(arg.getAliases().length != 0){
+                for(int i = 0; i < arg.getAliases().length; i++){
+                    aliaseString.replace("none", "");
+                    if(arg.getAliases().length - 1 == i){
+                        aliaseString += String.format("%s.", arg.getAliases()[i]);
+                        break;
+                    }
+                    System.out.println(arg.getAliases()[i] + ", ");
+                    aliaseString += String.format("%s, ", arg.getAliases()[i]);
+                }
+                System.out.println(arg.getName() +": "+ arg.getDescription() + " Aliases:" + aliaseString);        
+            }else{
+                System.out.println(arg.getName() +": "+ arg.getDescription());
+            }
         }
     }
 
     private void printCommand(Command arg){
-        System.out.println(arg.getName() + ": " + arg.getDescription() + " Aliases: " + arg.getAliases());
+        System.out.printf("%s: %s   /Aliases: ",arg.getName(),arg.getDescription());
+        for(int i = 0; i < arg.getAliases().length; i++){
+            if(arg.getAliases().length - 1 == i){
+                System.out.println(arg.getAliases()[i] + ".");
+                return;
+            }
+            System.out.println(arg.getAliases()[i] + ", ");
+        }
     }
 
     public SubCommand[] getSubcommands() {
