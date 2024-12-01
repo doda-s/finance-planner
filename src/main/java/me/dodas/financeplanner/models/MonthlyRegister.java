@@ -7,8 +7,8 @@ public class MonthlyRegister {
 
     String id;
 
-    List<Revenue> revenues = new ArrayList<>();
-    List<Expense> expenses = new ArrayList<>();
+    List<Registry> revenues = new ArrayList<>();
+    List<Registry> expenses = new ArrayList<>();
     double totalAmountRev = 0;
     double totalAmountExp = 0;
 
@@ -65,7 +65,7 @@ public class MonthlyRegister {
     // ----------------------------------------------------------------------------------
 
     // Métodos para manipulação de receitas
-    public List<Revenue> getRevenues() {
+    public List<Registry> getRevenues() {
         return revenues; // Retorna a lista de receitas
     }
 
@@ -85,7 +85,7 @@ public class MonthlyRegister {
     }
 
     // Métodos para manipulação de despesas
-    public List<Expense> getExpenses() {
+    public List<Registry> getExpenses() {
         return expenses; // Retorna a lista de despesas
     }
 
