@@ -70,12 +70,12 @@ public class MonthlyRegister {
     }
 
     public boolean addRevenue(Revenue revenue) {
-        totalAmountRev++;
+        totalAmountRev += revenue.getValue();
         return revenues.add(revenue); // Adiciona uma receita e retorna um booleano indicando sucesso
     }
 
     public boolean removeRevenue(Revenue revenue) {
-        totalAmountRev--;
+        totalAmountRev-= revenue.getValue();
         return revenues.remove(revenue); // Remove uma receita e retorna um booleano indicando sucesso
     }
 
@@ -90,12 +90,12 @@ public class MonthlyRegister {
     }
 
     public boolean addExpense(Expense expense) {
-        totalAmountExp++;
+        totalAmountExp+= expense.getValue();
         return expenses.add(expense); // Adiciona uma despesa e retorna um booleano indicando sucesso
     }
 
     public boolean removeExpense(Expense expense) {
-        totalAmountExp--;
+        totalAmountExp-= expense.getValue();
         return expenses.remove(expense); // Adiciona uma despesa e retorna um booleano indicando sucesso
     }
 
