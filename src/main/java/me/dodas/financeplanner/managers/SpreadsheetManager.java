@@ -49,10 +49,13 @@ public class SpreadsheetManager {
             throw new IllegalStateException("The name is invalid. Use [-n, --sheet_name <name>].");
         }
 
-        /* FileManager está retornando null quando é tentado ler um arquivo com nome inexistente.
-         * É necessário adicionar uma verificação antes de chamar o método gson.fromJson.
-         */
-        loadedSpreadsheet = gson.fromJson(fileManager.readFile(String.format("%s/%s.json", spreadsheetDirectory, spreadsheetName)), Spreadsheet.class);
+        String path = String.format("%s/%s.json", spreadsheetDirectory, spreadsheetName);
+
+        if(!fileManager.checkFile(path)) {
+            throw new IllegalArgumentException(String.format("No spreadsheet named '%s' was found", spreadsheetName));
+        }
+
+        loadedSpreadsheet = gson.fromJson(fileManager.readFile(path), Spreadsheet.class);
     }
 
     public void closeSpreadsheet() {
