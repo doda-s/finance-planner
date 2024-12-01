@@ -74,7 +74,7 @@ public class SpreadsheetManager {
         }
 
         fileManager.writeFile(String.format("%s/%s.json", spreadsheetDirectory, loadedSpreadsheet.getName()), gson.toJson(loadedSpreadsheet));
-        System.out.printf("The spreadsheet '%s' has been saved.", loadedSpreadsheet.getName());
+        System.out.printf("The spreadsheet '%s' has been saved.\n", loadedSpreadsheet.getName());
     }
     
     public void deleteSpreadsheet(String spreadsheetName) {

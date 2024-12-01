@@ -1,8 +1,9 @@
 package me.dodas.financeplanner.models;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Spreadsheet {
@@ -10,21 +11,44 @@ public class Spreadsheet {
     private String creationDate;
     private String lastUpdateDate;
 
-    private List <MonthlyRegister> monthlyRegister = new ArrayList<>();
+    private List <MonthlyRegister> monthlyRegisters = new ArrayList<>();
 
-    public void addMonthlyRegister(LocalDate date){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMyyyy");
-        int id = Integer.parseInt(dtf.format(date));
+    public void addMonthlyRegister(int month, int year){
+        if(monthlyRegisters == null) {
+            monthlyRegisters = new ArrayList<>();
+        }
 
-        MonthlyRegister register = new MonthlyRegister(id);
-        monthlyRegister.add(register);
+        Date nowDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        
+        calendar.setTime(nowDate);
+        
+        if (month > 12 || month < 1) {
+            month = calendar.get(Calendar.MONTH) + 1; // Meses começam em 0 (Janeiro = 0)
+        }
 
-        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        lastUpdateDate = LocalDate.now().format(dtf);
+        if (year == 0) {
+            year = calendar.get(Calendar.YEAR);
+        }
+
+        int monthlyRegisterId = Integer.valueOf(String.format("%s%s", month, year));
+
+        for(MonthlyRegister mr : monthlyRegisters) {
+            if(mr.getId() == monthlyRegisterId) {
+                throw new IllegalArgumentException(
+                    String.format("There is already a monthly register in month '%s' of year '%s'", month, year
+                ));
+            }
+        }
+
+        monthlyRegisters.add(new MonthlyRegister(Integer.valueOf(monthlyRegisterId)));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        lastUpdateDate = sdf.format(nowDate);
     }
 
     public MonthlyRegister getMonthlyRegister(int id){
-        for (MonthlyRegister register : monthlyRegister) {
+        for (MonthlyRegister register : monthlyRegisters) {
             if(register.getId() == id){
                 return register;
             }
@@ -55,10 +79,10 @@ public class Spreadsheet {
     }
 
     public Spreadsheet(String name){
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         this.name = name;
-        this.creationDate = date.format(dtf);
+        this.creationDate = sdf.format(date);
         this.lastUpdateDate = creationDate;
     }
 
