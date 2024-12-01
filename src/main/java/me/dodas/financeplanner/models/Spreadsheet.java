@@ -31,7 +31,7 @@ public class Spreadsheet {
             year = calendar.get(Calendar.YEAR);
         }
 
-        int monthlyRegisterId = Integer.valueOf(String.format("%s%s", month, year));
+        String monthlyRegisterId = String.format("%s%s", month, year);
 
         for(MonthlyRegister mr : monthlyRegisters) {
             if(mr.getId() == monthlyRegisterId) {
@@ -41,13 +41,13 @@ public class Spreadsheet {
             }
         }
 
-        monthlyRegisters.add(new MonthlyRegister(Integer.valueOf(monthlyRegisterId)));
+        monthlyRegisters.add(new MonthlyRegister(monthlyRegisterId));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         lastUpdateDate = sdf.format(nowDate);
     }
 
-    public MonthlyRegister getMonthlyRegister(int id){
+    public MonthlyRegister getMonthlyRegister(String id){
         for (MonthlyRegister register : monthlyRegisters) {
             if(register.getId() == id){
                 return register;
