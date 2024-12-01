@@ -94,6 +94,10 @@ public class SpreadsheetLoadSubCommand implements SubCommand {
 
             System.out.println(ise.getMessage());
 
+        } catch (IllegalArgumentException iae) {
+
+            System.out.println(iae.getMessage());
+            
         }
     }
     
