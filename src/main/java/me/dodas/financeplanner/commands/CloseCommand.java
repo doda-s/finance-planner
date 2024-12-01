@@ -30,7 +30,11 @@ public class CloseCommand implements Command {
     }
 
     public void executeCommand(List<String> args) {
-        SpreadsheetManager.getInstance().saveSpreadsheet();
+        try {
+            SpreadsheetManager.getInstance().saveSpreadsheet();
+        } catch (IllegalStateException ise) {
+            System.out.println(ise.getMessage());
+        }
         Main.stopRunning();
     }
     
