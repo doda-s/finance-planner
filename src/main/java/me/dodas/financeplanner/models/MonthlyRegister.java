@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MonthlyRegister {
 
-    int id;
+    String id;
 
     List<Revenue> revenues = new ArrayList<>();
     List<Expense> expenses = new ArrayList<>();
@@ -44,11 +44,11 @@ public class MonthlyRegister {
 
     // me perdi ja, mas vou dar meu melhor ksksksks
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public MonthlyRegister(int id) {
+    public MonthlyRegister(String id) {
         this.id = id;
     }
 
