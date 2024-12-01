@@ -5,6 +5,7 @@ import java.util.List;
 import me.dodas.financeplanner.Main;
 import me.dodas.financeplanner.interfaces.Command;
 import me.dodas.financeplanner.interfaces.SubCommand;
+import me.dodas.financeplanner.managers.SpreadsheetManager;
 
 public class CloseCommand implements Command {
 
@@ -29,6 +30,7 @@ public class CloseCommand implements Command {
     }
 
     public void executeCommand(List<String> args) {
+        SpreadsheetManager.getInstance().saveSpreadsheet();
         Main.stopRunning();
     }
     

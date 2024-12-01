@@ -60,7 +60,7 @@ public class SpreadsheetManager {
 
     public void closeSpreadsheet() {
         if(loadedSpreadsheet != null) {
-            //save
+            saveSpreadsheet();
             loadedSpreadsheet = null;
             return;
         }
