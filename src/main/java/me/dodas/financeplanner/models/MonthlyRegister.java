@@ -69,6 +69,18 @@ public class MonthlyRegister {
         return revenues; // Retorna a lista de receitas
     }
 
+    public Registry getRevenueById(String id) {
+        if(revenues != null) {
+            for(Registry rev : revenues) {
+                if (rev.getId() == id) {
+                    return rev;
+                }
+            }
+        }
+
+        return null;
+    }
+
     public boolean addRevenue(Revenue revenue) {
         totalAmountRev += revenue.getValue();
         return revenues.add(revenue); // Adiciona uma receita e retorna um booleano indicando sucesso
@@ -87,6 +99,18 @@ public class MonthlyRegister {
     // Métodos para manipulação de despesas
     public List<Registry> getExpenses() {
         return expenses; // Retorna a lista de despesas
+    }
+
+    public Registry getExpensesById(String id) {
+        if(expenses != null) {
+            for(Registry exp : expenses) {
+                if(exp.getId() == id) {
+                    return exp;
+                }
+            }
+        }
+
+        return null;
     }
 
     public boolean addExpense(Expense expense) {
