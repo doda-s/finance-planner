@@ -1,6 +1,5 @@
 package me.dodas.financeplanner.subcommands;
 
-import me.dodas.financeplanner.models.Registry;
 import java.util.List;
 
 import me.dodas.financeplanner.interfaces.SubCommand;
@@ -16,30 +15,21 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-public class MonthlyRegisterRemoveExpRevSubCommand implements SubCommand{
+public class MonthlyRegisterRemoveSubCommand implements SubCommand{
     private String name = "remove";
     private String description = "remove revenue or expenses which must be specified.";
     private Options options = new Options();
 
-    public MonthlyRegisterRemoveExpRevSubCommand(){
+    public MonthlyRegisterRemoveSubCommand(){
         options.addOption(
             "h","help",false, "Shows a list with flags information."
         );
-        options.addOption(
-            Option.builder("t")
-            .longOpt("type")
-            .hasArg(true)
-            .argName("type")
-            .desc("Choose between revenue and expenese to remove")
-            .required(true)
-            .build()
-            );
         options.addOption(
             Option.builder("i")
             .hasArg(true)
             .longOpt("id")
             .argName("id")
-            .desc("Specify the id of revenue/expense")
+            .desc("Specify the id of the monthly register")
             .required(true)
             .build());
     }
@@ -58,46 +48,32 @@ public class MonthlyRegisterRemoveExpRevSubCommand implements SubCommand{
     public void executeCommand(List<String> args) {
         CommandLineParser parser = new DefaultParser();
         HelpFormatter helpFormatter = new HelpFormatter();
-        List<MonthlyRegister> monthlyRegister = SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegister();
-        String type = null;
+        List<MonthlyRegister> monthlyRegisters = SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegister();
         String id = null;
-
+        Boolean success = null;
         try {
 
             CommandLine cmd = parser.parse(options, args.toArray(new String [0]));
             
             if(cmd.hasOption("h")){
-                helpFormatter.printHelp("remove revenue or expenses", options);
-            }
-
-            if(cmd.hasOption("t")){
-                type = cmd.getOptionValue("t");
+                helpFormatter.printHelp("remove monthly register", options);
             }
 
             if(cmd.hasOption("id")){
                 id = cmd.getOptionValue("id");
+                System.out.println(id);
             }
-
-            if(type == "revenue"){
-                for (MonthlyRegister monthlyReg : monthlyRegister) {
-                    List<Registry> revenues = monthlyReg.getRevenues();
-                    revenues.remove(monthlyReg.getRevenueById(id));
-                }
+            
+            success = monthlyRegisters.remove(SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegisterById(id));
+            if(success){
+                System.out.println(id + " removed successfully.");
+                return;
             }
-
-            if(type == "expense"){
-                for (MonthlyRegister monthlyReg : monthlyRegister) {
-                    List<Registry> expenses = monthlyReg.getExpenses();
-                    expenses.remove(monthlyReg.getExpensesById(id));
-                }
-            }
+            System.out.println(id + " doens't exists.");                
 
         } 
         catch (MissingArgumentException mae) {
             // Quando uma opção que requer argumento, recebe um argumento nulo.
-            if(mae.getOption().getOpt().equals("t")) {
-                System.out.println("The [-t] flag needs a value <type>");
-            }
             if(mae.getOption().getOpt().equals("i")) {
                 System.out.println("The [-i] flag needs a value <id>");
             }
