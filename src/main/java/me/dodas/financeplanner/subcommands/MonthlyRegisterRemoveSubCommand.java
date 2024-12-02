@@ -48,7 +48,6 @@ public class MonthlyRegisterRemoveSubCommand implements SubCommand{
     public void executeCommand(List<String> args) {
         CommandLineParser parser = new DefaultParser();
         HelpFormatter helpFormatter = new HelpFormatter();
-        List<MonthlyRegister> monthlyRegisters = SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegister();
         String id = null;
         Boolean success = null;
         try {
@@ -61,10 +60,11 @@ public class MonthlyRegisterRemoveSubCommand implements SubCommand{
 
             if(cmd.hasOption("id")){
                 id = cmd.getOptionValue("id");
-                System.out.println(id);
             }
             
-            success = monthlyRegisters.remove(SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegisterById(id));
+            MonthlyRegister mr =SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegisterById(id);
+
+            success = SpreadsheetManager.getInstance().getLoadedSpreadsheet().removeMonthlyRegister(mr); 
             if(success){
                 System.out.println(id + " removed successfully.");
                 return;
