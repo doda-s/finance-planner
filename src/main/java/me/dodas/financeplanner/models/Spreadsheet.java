@@ -47,13 +47,21 @@ public class Spreadsheet {
         lastUpdateDate = sdf.format(nowDate);
     }
 
-    public MonthlyRegister getMonthlyRegister(String id){
+    public boolean removeMonthlyRegister(MonthlyRegister mr) {
+        return monthlyRegisters.remove(mr);
+    }
+
+    public MonthlyRegister getMonthlyRegisterById(String id){
         for (MonthlyRegister register : monthlyRegisters) {
-            if(register.getId() == id){
+            if(register.getId().equals(id)){
                 return register;
             }
         }
         return null;
+    }
+
+    public List<MonthlyRegister> getMonthlyRegister(){
+        return monthlyRegisters;
     }
 
 

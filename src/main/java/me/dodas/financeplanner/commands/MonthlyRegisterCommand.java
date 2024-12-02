@@ -6,6 +6,8 @@ import java.util.List;
 import me.dodas.financeplanner.interfaces.Command;
 import me.dodas.financeplanner.interfaces.SubCommand;
 import me.dodas.financeplanner.subcommands.MonthlyRegisterCreateSubCommand;
+import me.dodas.financeplanner.subcommands.MonthlyRegisterListSubCommand;
+import me.dodas.financeplanner.subcommands.MonthlyRegisterRemoveSubCommand;
 
 public class MonthlyRegisterCommand implements Command {
 
@@ -41,6 +43,8 @@ public class MonthlyRegisterCommand implements Command {
     // Load the sub commands :D
     private void loadSubCommands() {
 		subCommands.add(new MonthlyRegisterCreateSubCommand());
+		subCommands.add(new MonthlyRegisterListSubCommand());
+		subCommands.add(new MonthlyRegisterRemoveSubCommand());
     }
     
 }
