@@ -1,5 +1,8 @@
 package me.dodas.financeplanner.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Revenue extends Registry {
 
     private String id;
@@ -10,6 +13,9 @@ public class Revenue extends Registry {
 
     public Revenue (String id) {
         this.id = id;
+        Date nowDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        creationDate = sdf.format(nowDate);
     }
     
     public String getId() {
@@ -44,6 +50,7 @@ public class Revenue extends Registry {
         return creationDate;
     }
 
+    //remover da classe abstrata.
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }

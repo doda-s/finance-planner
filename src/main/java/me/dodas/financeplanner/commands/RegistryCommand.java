@@ -5,6 +5,7 @@ import java.util.List;
 
 import me.dodas.financeplanner.interfaces.Command;
 import me.dodas.financeplanner.interfaces.SubCommand;
+import me.dodas.financeplanner.subcommands.RegistryAddSubCommand;
 
 public class RegistryCommand implements Command {
 
@@ -42,7 +43,7 @@ public class RegistryCommand implements Command {
 
     // Load sub commands XD
     private void loadSubCommands() {
-
+        subCommands.add(new RegistryAddSubCommand());
     }
     
 }

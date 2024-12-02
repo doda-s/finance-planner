@@ -5,12 +5,22 @@ import java.util.List;
 
 public class MonthlyRegister {
 
-    String id;
+    private String id;
 
-    List<Registry> revenues = new ArrayList<>();
-    List<Registry> expenses = new ArrayList<>();
-    double totalAmountRev = 0;
-    double totalAmountExp = 0;
+    private List<Registry> revenues = new ArrayList<>();
+    private List<Registry> expenses = new ArrayList<>();
+    private double totalAmountRev = 0;
+    private double totalAmountExp = 0;
+    private int revenueQuantityValue = 0;
+    private int expenseQuantityValue = 0;
+
+    public int getRevenueQuantityValue() {
+        return revenueQuantityValue;
+    }
+
+    public int getExpenseQuantityValue() {
+        return expenseQuantityValue;
+    }
 
     // parte abaixo foi melhorada pelo chat gpt, to tentando entender melhor ainda
     // atualização: entendi tudo agora, genial...
@@ -81,17 +91,18 @@ public class MonthlyRegister {
         return null;
     }
 
-    public boolean addRevenue(Revenue revenue) {
+    public boolean addRevenue(Registry revenue) {
         totalAmountRev += revenue.getValue();
+        revenueQuantityValue++;
         return revenues.add(revenue); // Adiciona uma receita e retorna um booleano indicando sucesso
     }
 
-    public boolean removeRevenue(Revenue revenue) {
+    public boolean removeRevenue(Registry revenue) {
         totalAmountRev-= revenue.getValue();
         return revenues.remove(revenue); // Remove uma receita e retorna um booleano indicando sucesso
     }
 
-    public void editRevenue(int index, Revenue revenues) {
+    public void editRevenue(int index, Registry revenues) {
         this.revenues.remove(index);
         this.revenues.add(revenues);
     }
@@ -113,17 +124,18 @@ public class MonthlyRegister {
         return null;
     }
 
-    public boolean addExpense(Expense expense) {
+    public boolean addExpense(Registry expense) {
         totalAmountExp+= expense.getValue();
+        expenseQuantityValue++;
         return expenses.add(expense); // Adiciona uma despesa e retorna um booleano indicando sucesso
     }
 
-    public boolean removeExpense(Expense expense) {
+    public boolean removeExpense(Registry expense) {
         totalAmountExp-= expense.getValue();
         return expenses.remove(expense); // Adiciona uma despesa e retorna um booleano indicando sucesso
     }
 
-    public void editExpenses(int index, Expense expenses) {
+    public void editExpenses(int index, Registry expenses) {
         this.expenses.remove(index);
         this.expenses.add(expenses);
     }
