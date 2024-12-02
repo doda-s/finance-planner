@@ -1,11 +1,14 @@
 package me.dodas.financeplanner.subcommands;
 
     import me.dodas.financeplanner.models.Registry;
-    import java.util.List;
+import me.dodas.financeplanner.models.Revenue;
+
+import java.util.List;
     
     import me.dodas.financeplanner.interfaces.SubCommand;
     import me.dodas.financeplanner.managers.SpreadsheetManager;
-    import me.dodas.financeplanner.models.MonthlyRegister;
+import me.dodas.financeplanner.models.Expense;
+import me.dodas.financeplanner.models.MonthlyRegister;
     
     import org.apache.commons.cli.CommandLine;
     import org.apache.commons.cli.CommandLineParser;
@@ -49,6 +52,22 @@ public class RegistryAddSubCommand implements SubCommand{
                 .desc("description of the revenue/expense")
                 .required(true)
                 .build());
+             options.addOption(
+                Option.builder("v")
+                .hasArg(true)
+                .argName("value")
+                .desc("value of the revenue/expense")
+                .required(true)
+                .build());
+            options.addOption(
+                Option.builder("n")
+                .hasArg(true)
+                .argName("name")
+                .desc("name of the revenue/expense")
+                .required(true)
+                .build());    
+             
+            
         }
     
         @Override
@@ -67,35 +86,56 @@ public class RegistryAddSubCommand implements SubCommand{
             HelpFormatter helpFormatter = new HelpFormatter();
             String type = null;
             String id = null;
-    
+            String name = null;
+            String description = null;
+            Double value = null;
+
             try {
     
                 CommandLine cmd = parser.parse(options, args.toArray(new String [0]));
                 
                 if(cmd.hasOption("h")){
-                    helpFormatter.printHelp("remove revenue or expenses", options);
+                    helpFormatter.printHelp("add revenue or expenses", options);
                 }
     
                 if(cmd.hasOption("t")){
                     type = cmd.getOptionValue("t");
                 }
     
-                if(cmd.hasOption("id")){
-                    id = cmd.getOptionValue("id");
+                if(cmd.hasOption("i")){
+                    id = cmd.getOptionValue("i");
+                }
+
+                if(cmd.hasOption("n")){
+                    name = cmd.getOptionValue("n");
+                }
+                
+                if(cmd.hasOption("d")){
+                    description = cmd.getOptionValue("d");
+                }
+
+                if(cmd.hasOption("v")){
+                    value = Double.valueOf(cmd.getOptionValue("v"));
+                }
+
+
+                MonthlyRegister mr =SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegisterById(id);
+
+                if(type.equals("revenue")){
+                    Registry revenue = new Revenue(id + mr.getRevenueQuantityValue());
+                    revenue.setDescription(description);
+                    revenue.setName(name);
+                    revenue.setValue(value);
+                    mr.addRevenue(revenue);
+                    System.out.println("entrou no type");
                 }
     
-                if(type == "revenue"){
-                    for (MonthlyRegister monthlyReg : monthlyRegister) {
-                        List<Registry> revenues = monthlyReg.getRevenues();
-                        revenues.remove(monthlyReg.getRevenueById(id));
-                    }
-                }
-    
-                if(type == "expense"){
-                    for (MonthlyRegister monthlyReg : monthlyRegister) {
-                        List<Registry> expenses = monthlyReg.getExpenses();
-                        expenses.remove(monthlyReg.getExpensesById(id));
-                    }
+                if(type.equals("expense")){
+                    Registry expense = new Expense(id + mr.getExpenseQuantityValue());
+                    expense.setDescription(description);
+                    expense.setName(name);
+                    expense.setValue(value);
+                    mr.addRevenue(expense);
                 }
     
             } 
@@ -107,7 +147,15 @@ public class RegistryAddSubCommand implements SubCommand{
                 if(mae.getOption().getOpt().equals("i")) {
                     System.out.println("The [-i] flag needs a value <id>");
                 }
-    
+                if(mae.getOption().getOpt().equals("d")) {
+                    System.out.println("The [-d] flag needs a value <description>");
+                }
+                if(mae.getOption().getOpt().equals("v")) {
+                    System.out.println("The [-v] flag needs a value <value>");
+                }
+                if(mae.getOption().getOpt().equals("n")) {
+                    System.out.println("The [-n] flag needs a value <namere>");
+                }
                 System.out.println("Use [-h, --help] to see a help list with all flags.");
     
             } catch (ParseException pe) {
