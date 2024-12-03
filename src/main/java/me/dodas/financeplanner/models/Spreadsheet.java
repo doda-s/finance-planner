@@ -60,6 +60,9 @@ public class Spreadsheet {
         return null;
     }
 
+    /* Caso não tenha nenhum monthly register salvo no arquivo Json, ao desserializar a lista monthlyRegister fica null.
+     * Ou seja, é necessário fazer uma verificação toda vez que essa função for chamada.
+    */
     public List<MonthlyRegister> getMonthlyRegister(){
         return monthlyRegisters;
     }
