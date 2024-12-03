@@ -1,8 +1,11 @@
 package me.dodas.financeplanner.managers;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import me.dodas.financeplanner.models.MonthlyRegister;
 import me.dodas.financeplanner.models.Spreadsheet;
+import me.dodas.financeplanner.utils.MonthlyRegisterAdapter;
 
 public class SpreadsheetManager {
 
@@ -10,7 +13,7 @@ public class SpreadsheetManager {
     private FileManager fileManager = FileManager.getInstance();
     private DirectoryManager directoryManager = DirectoryManager.getInstance();
     private ConfigManager configManager = ConfigManager.getInstance();
-    private Gson gson = new Gson();
+    private Gson gson = new GsonBuilder().registerTypeAdapter(MonthlyRegister.class, new MonthlyRegisterAdapter()).create();
     private Spreadsheet loadedSpreadsheet;
     private String spreadsheetDirectory = String.format("%s/%s", directoryManager.getRootPath(), configManager.getProperty("directory.spreadsheet.root"));
 
