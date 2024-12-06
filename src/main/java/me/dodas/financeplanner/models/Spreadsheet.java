@@ -64,7 +64,10 @@ public class Spreadsheet {
      * Ou seja, é necessário fazer uma verificação toda vez que essa função for chamada.
     */
     public List<MonthlyRegister> getMonthlyRegister(){
-        return monthlyRegisters;
+    	if(monthlyRegisters != null) {
+    		return monthlyRegisters;
+    	}
+        return null;
     }
 
 

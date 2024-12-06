@@ -47,9 +47,12 @@ public class MonthlyRegisterListSubCommand implements SubCommand{
                 helpFormatter.printHelp("list all the registers in this spreadsheet", options);
                 return;
             }
-            for (MonthlyRegister monthlyReg : SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegister()) {
-                printItemList(monthlyReg);          
-            } 
+            if(SpreadsheetManager.getInstance().getLoadedSpreadsheet() != null) {
+            	for (MonthlyRegister monthlyReg : SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegister()) {
+                    printItemList(monthlyReg);          
+                } 
+            }
+            
         }
         catch (ParseException pe) {
 
