@@ -91,7 +91,10 @@ public class SpreadsheetManager {
     }
 
     public Spreadsheet getLoadedSpreadsheet() {
-        return loadedSpreadsheet;
+    	if(loadedSpreadsheet != null) {
+            return loadedSpreadsheet;	
+    	}
+    	return null;
     }
 
     public Spreadsheet getSpreadsheetByName(String name) {
