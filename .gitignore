@@ -31,3 +31,4 @@ replay_pid*
 /.metadata/
 *.classpath
 *.project
+*.settings/
