@@ -93,4 +93,13 @@ public class SpreadsheetManager {
     public Spreadsheet getLoadedSpreadsheet() {
         return loadedSpreadsheet;
     }
+
+    public Spreadsheet getSpreadsheetByName(String name) {
+        String path = String.format("%s/%s", spreadsheetDirectory, name+".json");
+        if (fileManager.checkFile(path)) {
+            Spreadsheet sheet = gson.fromJson(fileManager.readFile(path), Spreadsheet.class);
+            return sheet;
+        }
+        return null;
+    }
 }

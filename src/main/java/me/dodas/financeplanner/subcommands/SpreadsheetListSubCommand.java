@@ -2,12 +2,11 @@ package me.dodas.financeplanner.subcommands;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import me.dodas.financeplanner.interfaces.SubCommand;
 import me.dodas.financeplanner.managers.ConfigManager;
 import me.dodas.financeplanner.managers.DirectoryManager;
 import me.dodas.financeplanner.managers.FileManager;
+import me.dodas.financeplanner.managers.SpreadsheetManager;
 import me.dodas.financeplanner.models.Spreadsheet;
 
 public class SpreadsheetListSubCommand implements SubCommand {
@@ -25,7 +24,6 @@ public class SpreadsheetListSubCommand implements SubCommand {
     }
 
     public void executeCommand(List<String> args) {
-        Gson gson = new Gson();
         String spreadsheetsPath = String.format("%s/%s", 
             DirectoryManager.getInstance().getRootPath(), 
             ConfigManager.getInstance().getProperty("directory.spreadsheet.root"
@@ -33,11 +31,11 @@ public class SpreadsheetListSubCommand implements SubCommand {
 
         String[] filesName = fileManager.getFilesName(spreadsheetsPath, new String[]{".json"});
 
-        for(int i = 0; i < filesName.length; i++) {
-            String path = String.format("%s/%s", spreadsheetsPath, filesName[i]);
-            Spreadsheet spreadsheet = gson
-                .fromJson(fileManager.readFile(path), Spreadsheet.class);
-            printItemList(spreadsheet);
+        for(String name : filesName) {
+            printItemList(SpreadsheetManager
+                .getInstance()
+                .getSpreadsheetByName(name.replace(".json", ""))
+            );
         }
     }
 
