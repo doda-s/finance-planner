@@ -1,5 +1,7 @@
 package me.dodas.financeplanner.subcommands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.dodas.financeplanner.interfaces.SubCommand;
@@ -8,6 +10,7 @@ import me.dodas.financeplanner.managers.DirectoryManager;
 import me.dodas.financeplanner.managers.FileManager;
 import me.dodas.financeplanner.managers.SpreadsheetManager;
 import me.dodas.financeplanner.models.Spreadsheet;
+import me.dodas.financeplanner.utils.TableFormatter;
 
 public class SpreadsheetListSubCommand implements SubCommand {
 
@@ -30,21 +33,24 @@ public class SpreadsheetListSubCommand implements SubCommand {
         ));
 
         String[] filesName = fileManager.getFilesName(spreadsheetsPath, new String[]{".json"});
+        List<String> header = Arrays.asList("NAME", "CREATION DATE", "LAST UPDATE");
+        List<String[]> rows = new ArrayList<>();
 
         for(String name : filesName) {
-            printItemList(SpreadsheetManager
+            Spreadsheet sheet = SpreadsheetManager
                 .getInstance()
-                .getSpreadsheetByName(name.replace(".json", ""))
+                .getSpreadsheetByName(name.replace(".json", ""));
+                
+            // Adiciona uma nova linha, onde cada elemento da String[] representa uma coluna
+            rows.add(
+                new String[]{
+                    sheet.getName().toUpperCase(), 
+                    sheet.getCreationDate(), sheet.getLastUpdateDate()
+                }
             );
         }
-    }
-
-    private void printItemList(Spreadsheet item) {
-        System.out.print("--------------------------------------------------\n");
-        System.out.print(item.getName().toUpperCase()+"\n");
-        System.out.print("Creation: "+item.getCreationDate()+"\n");
-        System.out.print("Last update: "+item.getLastUpdateDate()+"\n");
-        System.out.print("--------------------------------------------------\n");
+        TableFormatter tf = new TableFormatter(header, rows);
+        tf.printTable();
     }
     
 }

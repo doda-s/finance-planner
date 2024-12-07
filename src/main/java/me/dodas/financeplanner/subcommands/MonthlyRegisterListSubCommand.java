@@ -1,5 +1,7 @@
 package me.dodas.financeplanner.subcommands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
@@ -12,7 +14,7 @@ import org.apache.commons.cli.ParseException;
 import me.dodas.financeplanner.interfaces.SubCommand;
 import me.dodas.financeplanner.managers.SpreadsheetManager;
 import me.dodas.financeplanner.models.MonthlyRegister;
-import me.dodas.financeplanner.models.Registry;
+import me.dodas.financeplanner.utils.TableFormatter;
 
 public class MonthlyRegisterListSubCommand implements SubCommand{
     private String name = "list";
@@ -47,10 +49,21 @@ public class MonthlyRegisterListSubCommand implements SubCommand{
                 helpFormatter.printHelp("list all the registers in this spreadsheet", options);
                 return;
             }
+
+            List<String> headers = Arrays.asList("ID", "AMOUNT REVENUES", "AMOUNT EXPENSES");
+            List<String[]> rows = new ArrayList<>();
+
             if(SpreadsheetManager.getInstance().getLoadedSpreadsheet() != null) {
             	for (MonthlyRegister monthlyReg : SpreadsheetManager.getInstance().getLoadedSpreadsheet().getMonthlyRegister()) {
-                    printItemList(monthlyReg);          
-                } 
+                    // Adiciona uma nova linha, onde cada elemento da String[] representa uma coluna
+                    rows.add(new String[]{
+                        monthlyReg.getId(), 
+                        "R$"+monthlyReg.getTotalAmountRevenues(), 
+                        "R$"+monthlyReg.getTotalAmountExpenses()}
+                    );          
+                }
+                TableFormatter tf = new TableFormatter(headers, rows);
+                tf.printTable();
             }
             
         }
@@ -64,20 +77,6 @@ public class MonthlyRegisterListSubCommand implements SubCommand{
 
         }
         
-    }
-    
-    private void printItemList(MonthlyRegister register) {
-        System.out.print("--------------------------------------------------\n");
-        System.out.print(register.getId()+"\n");
-        System.out.print("Total revenues: " + register.getTotalAmountRevenues() + "\n");
-        for (Registry reg : register.getRevenues()) {
-            System.out.print("  " + reg.getId() + ": " + reg.getValue() + "\n");
-        }
-        System.out.print("Total expenses: " + register.getTotalAmountExpenses() + "\n");
-        for (Registry reg : register.getExpenses()) {
-            System.out.print("  " + reg.getId() + ": " + reg.getValue() + "\n");
-        }
-        System.out.print("--------------------------------------------------\n");
     }
 
 }
